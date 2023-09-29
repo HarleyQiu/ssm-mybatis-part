@@ -4,6 +4,7 @@ import org.example.pojo.Employee;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public interface EmployeeMapper {
 
@@ -25,5 +26,5 @@ public interface EmployeeMapper {
 
     //插入员工数据，传入的是一个map(name=员工的名字,salary=员工的薪水)
     //mapper接口中不允许重载！！！ 方法名重复了  id名重复了！
-    int insertEmpMap(Map data);
+    int insertEmpMap(Map<String, Objects> data);
 }
