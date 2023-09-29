@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.EmployeeMapper">
+
+    <!--
+    #{key} 占位符 推荐使用这个 动态值
+    ${key} 字符串拼接  动态的列名 容器名 关键字
+    -->
+    <select id="queryById" resultType="Employee">
+        select emp_id empId, emp_name empName, emp_salary empSalary
+        from t_emp
+        where emp_id = ${empId}
+    </select>
+</mapper>

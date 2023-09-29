@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mybatis-base-quick-01</module>
+        <module>mybatis-base-input-02</module>
     </modules>
 
     <properties>
@@ -39,6 +40,18 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.3.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version> <!-- 使用最新版本 -->
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId> <!-- 选择一个SLF4J的日志实现，这里选择log4j -->
+            <version>1.7.32</version> <!-- 使用最新版本 -->
+        </dependency>
     </dependencies>
+
 
 </project>
