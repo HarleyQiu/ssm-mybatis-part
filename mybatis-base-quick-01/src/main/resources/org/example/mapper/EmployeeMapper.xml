@@ -11,7 +11,8 @@
             标签内编写SQL语句
     -->
     <select id="selectEmployee" resultType="Employee">
-        select emp_id empId,emp_name empName, emp_salary empSalary from
-        t_emp where emp_id = #{empId}
+        select emp_id empId, emp_name empName, emp_salary empSalary
+        from t_emp
+        where emp_id = #{empId}
     </select>
 </mapper>
