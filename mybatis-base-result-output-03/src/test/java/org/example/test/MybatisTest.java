@@ -5,7 +5,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.example.mapper.EmployeeMapper;
+import org.example.mapper.TeacherMapper;
 import org.example.pojo.Employee;
+import org.example.pojo.Teacher;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -60,6 +62,36 @@ public class MybatisTest {
 
         //5.释放资源 和 提交事务
         //sqlSession.commit(); //DML语句
+        sqlSession.close();
+
+    }
+
+
+    @Test
+    public void test_02() throws IOException {
+
+        InputStream ips = Resources.getResourceAsStream("mybatis-config.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(ips);
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+        //4.获取代理对象
+        TeacherMapper mapper = sqlSession.getMapper(TeacherMapper.class);
+
+        Teacher teacher = new Teacher();
+        teacher.settName("呵呵呵");
+
+        //自己维护主键
+        //String id = UUID.randomUUID().toString().replaceAll("-", "");
+        //teacher.settId(id);
+
+        System.out.println(teacher.gettId());
+
+        int i = mapper.insertTeacher(teacher);
+
+        System.out.println(teacher.gettId());
+        System.out.println("i = " + i);
+
+        //5.释放资源 和 提交事务
         sqlSession.close();
 
     }

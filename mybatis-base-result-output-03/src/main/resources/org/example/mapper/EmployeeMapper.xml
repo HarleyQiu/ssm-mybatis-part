@@ -4,6 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.mapper.EmployeeMapper">
 
+    <!-- 专门声明一个resultMap设定column到property之间的对应关系 -->
+    <resultMap id="selectEmployeeByRMResultMap" type="org.example.pojo.Employee">
+        <!-- 使用id标签设置主键列和主键属性之间的对应关系 -->
+        <!-- 使用result标签设置普通字段和Java实体类属性之间的关系 -->
+        <!-- column属性用于指定字段名；property属性用于指定Java实体类属性名 -->
+        <id column="emp_id" property="empId"/>
+        <result column="emp_name" property="empName"/>
+        <result column="emp_salary" property="empSalary"/>
+    </resultMap>
+
+    <!-- Employee selectEmployeeByRM(Integer empId); -->
+    <select id="selectEmployeeByRM" resultMap="selectEmployeeByRMResultMap">
+        select emp_id, emp_name, emp_salary
+        from t_emp
+        where emp_id = #{empId}
+    </select>
+
     <!-- DML -->
     <delete id="deleteById">
         delete

@@ -21,6 +21,7 @@
 
     <typeAliases>
         <typeAlias type="org.example.pojo.Employee" alias="employee"/>
+        <typeAlias type="org.example.pojo.Teacher" alias="teacher"/>
     </typeAliases>
 
     <environments default="development">
