@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.CustomerMapper">
+
+    <resultMap id="customerMap" type="customer">
+        <id column="customer_id" property="customerId"/>
+        <result column="customer_name" property="customerName"/>
+
+        <!-- collection标签：映射“对多”的关联关系 -->
+        <!-- property属性：在Customer类中，关联“多”的一端的属性名 -->
+        <!-- ofType属性：集合属性中元素的类型 -->
+        <collection property="orderList" ofType="order">
+            <id column="order_id" property="orderId"/>
+            <result column="order_name" property="orderName"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryList" resultMap="customerMap">
+        SELECT c.customer_id, c.customer_name, o.order_id, o.order_name
+        FROM t_customer c
+                 JOIN t_order o
+                      ON c.customer_id = o.customer_id
+    </select>
+</mapper>

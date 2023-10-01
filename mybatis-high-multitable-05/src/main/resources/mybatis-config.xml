@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+        MyBatis核心配置文件中的标签必须要按照指定的顺序配置:
+            properties?,settings?,typeAliases?,typeHandlers?,
+            objectFactory?,objectWrapperFactory?,reflectorFactory?,
+            plugins?,environments?,databaseIdProvider?,mappers?
+    -->
+
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <!-- 自动映射为驼峰式命名方式 默认为false -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- SLF4J 选择slf4j输出！ -->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!-- FULL 会自动映射任何复杂的结果集（无论是否嵌套） -->
+        <setting name="autoMappingBehavior" value="FULL"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="org.example.pojo.Customer" alias="customer"/>
+        <typeAlias type="org.example.pojo.Order" alias="order"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--引入映射文件-->
+    <mappers>
+        <package name="org.example.mapper"/>
+    </mappers>
+</configuration>
