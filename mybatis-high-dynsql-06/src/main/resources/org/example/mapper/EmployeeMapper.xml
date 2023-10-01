@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.EmployeeMapper">
+
+    <!--    List<Employee> query(@Param("name") String name, @Param("salary") Double salary);
+            如果传入属性,就判断相等,如果不传入,不加对应的条件
+            where
+            if 判断传入的参数,最终是否添加语句
+                test属性 内部做比较运算,最终true将标签内的sql语句进行拼接
+                                          false不拼接标签内部语句
+                    判断语句: " key 比较符号 值 and | or key 比较符号 值"
+                    大于和小于 不推荐直接写符号!  实体符号 html   >   == &gt;  < &lt;
+
+            问题:
+               假如两个都满足 where emp_name = #{name}  and emp_salary = #{salary}
+               假如第一个满足 where  emp_name = #{name}
+               假如第一个不满足,第二个满足 where and emp_salary = #{salary}   错误
+               假如都不满足 where
+
+            where标签的作用有两个:
+                1. 自动添加where关键字  where内部有任何一个if满足,自动添加where关键字,不满足去掉where!
+                2. 自动去掉多余的and 和 or 关键字
+
+    -->
+    <select id="query" resultType="employee">
+        select * from t_emp
+        <where>
+            <if test="name != null">
+                emp_name = #{name}
+            </if>
+            <if test="salary != null">
+                and emp_salary = #{salary}
+            </if>
+        </where>
+    </select>
+</mapper>
