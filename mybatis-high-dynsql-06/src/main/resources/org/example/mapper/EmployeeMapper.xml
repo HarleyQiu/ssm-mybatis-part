@@ -4,6 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.mapper.EmployeeMapper">
 
+    <sql id="selectSql">
+        select *
+        from t_emp
+    </sql>
+
     <!--    List<Employee> query(@Param("name") String name, @Param("salary") Double salary);
             如果传入属性,就判断相等,如果不传入,不加对应的条件
             where
@@ -24,7 +29,7 @@
                 2. 自动去掉多余的and 和 or 关键字
     -->
     <select id="query" resultType="employee">
-        select * from t_emp
+        <include refid="selectSql"/>
         <where>
             <if test="name != null">
                 emp_name = #{name}
@@ -60,7 +65,7 @@
     </update>
 
     <select id="queryTrim" resultType="employee">
-        select * from t_emp
+        <include refid="selectSql"/>
         <trim prefixOverrides="and | or" suffixOverrides="and | or">
             <if test="name != null">
                 emp_name = #{name}
@@ -138,7 +143,7 @@
             (#{Employee.empName}, #{Employee.empSalary})
         </foreach>
     </insert>
-    
+
     <update id="updateBatch">
         <foreach collection="list" item="Employee">
             update t_emp
