@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.EmployeeMapper">
+    <select id="queryList" resultType="employee">
+        <!-- 正常编写语句即可! 不要使用;结尾 -->
+        select * from t_emp where emp_salary > 100
+    </select>
+</mapper>
